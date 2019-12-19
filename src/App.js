@@ -16,8 +16,8 @@ const App = () => {
       </nav>
       <Switch>  
         <Route exact path='/' component={Home} />
-        <Route exact path='/apollo' component={ApolloFeed} />
-        <Route exact path='/rovers' component={Rovers} />
+        <Route path='/apollo' component={ApolloFeed} />
+        <Route path='/rovers' component={Rovers} />
         <Route path='/details/:id' component={Details} />
       </Switch>
     </div>
