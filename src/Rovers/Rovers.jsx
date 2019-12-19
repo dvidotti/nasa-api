@@ -2,21 +2,32 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 const Rovers = () => {
+
+  // CONSTANTS
+  const months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  const curiosityYears = ["","2012","2013", "2014", "2015", "2016", "2017", "2018", "2019"];
+
+  const oportunityYears = ["", "2005","2006", "2007", "2008", "2009", "2010", "2011","2012", "2013", "2014", "2015", "2016", "2017", "2018"];
+
+  const spiritYears = ["","2004", "2005", "2006", "2007", "2008", "2009", "2010"];
+  
+
+
+
+  // HOOKS
   const [data] = useState({curiosity:"curiosity",opportunity:"opportunity",spirit:"spirit"});
   const [ pics, handlePics ] = useState(false);
   const [ rover, handleRover ] = useState('curiosity');
   const [ year, handleYear ] = useState('');
   const [ month, handleMonth ] = useState('');
-  const [monthText, handleMonthText] = useState('');
+  const [ monthsArray, handleMonthArray ] = useState(months);
+  const [ monthText, handleMonthText] = useState('');
   
 
   
   
-  const curiosityYears = ["","2012","2013", "2014", "2015", "2016", "2017", "2018", "2019"]
-  const oportunityYears = ["", "2005","2006", "2007", "2008", "2009", "2010", "2011","2012", "2013", "2014", "2015", "2016", "2017", "2018"]
-  const spiritYears = ["","2004", "2005", "2006", "2007", "2008", "2009", "2010"];
-  const months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
+  
 
   const giveRoverYearsList = () => {
     switch (rover) {
@@ -74,9 +85,6 @@ const Rovers = () => {
     }
   }
 
-  console.log(month)
-  console.log(monthText)
-
   const helpHandleRover = (e) => {
     handleRover(e.target.value)
     handleYear(year)
@@ -132,19 +140,29 @@ const Rovers = () => {
     }
   }
 
+  
+
 
   useEffect(() => {
-    giveRoverMonthsList(); 
+    handleYear(giveRoverYearsList());
+    handleMonthArray(giveRoverMonthsList())
+  }, [rover])
+
+  useEffect(() => {
+    console.log(giveRoverMonthsList())
+    
+    handleMonthArray(giveRoverMonthsList()); 
   }, [year])
   
 
   useEffect(() => {
+    console.log(monthsArray)
     monthsFromTextToNumbers(month); 
-  }, [month])
+  }, [month, monthsArray])
 
   const getRoverPic = async (rover) => {
     try {
-      const picsRover = await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${year}-${monthText}-3&api_key=DEMO_KEY`);
+      const picsRover = await axios.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${year}-${monthText}-3&api_key=${process.env.REACT_APP_NASA_API_KEY}`);
       console.log(picsRover)
       handlePics(picsRover)
     }
@@ -186,9 +204,10 @@ const Rovers = () => {
         
         <div>
           <select type='text' id="select-month" onChange={helpHandleMonth}>
-            {giveRoverMonthsList().map((month, idx) => {
+            {monthsArray.map((month, idx) => {
+              console.log(month)
               if (idx === 0) {
-                return <option selected="selected" key={idx} value={month}>{month}</option> 
+                return <option  key={idx} value={month}>{month}</option> 
                 } else return <option key={idx} value={month}>{month}</option>  
             })}
 

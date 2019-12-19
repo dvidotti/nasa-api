@@ -9,6 +9,11 @@ import Rovers from './Rovers/Rovers'
 const App = () => {
   return (
     <div className="App">
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/apollo">APOLLO</a>
+        <a href="/rovers">ROVER</a>
+      </nav>
       <Switch>  
         <Route exact path='/' component={Home} />
         <Route exact path='/apollo' component={ApolloFeed} />
