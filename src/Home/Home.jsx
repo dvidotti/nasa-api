@@ -5,29 +5,51 @@ import './Home.css'
 
 const Home = () => {
   const [pic, handlePic] = useState('');
-  const [date, handleDate ] = useState('');
   const [moveDays, handleMoveDays ] = useState(0);
+ 
+  
   const today = new Date()
-  const day = today.toString().split(' ')[2];
-  const year = today.toString().split(' ')[3];
-  console.log(pic)
-
+  
+  const monthTextArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const monthText = today.toString().split(' ')[1];
+  const monthNumber = monthTextArr.indexOf(monthText) + 1 ;
+  
+  const [year, handleYear] = useState(parseInt(today.toString().split(' ')[3]));
+  const [month, handleMonth] = useState(monthNumber)
+  const [day, handleDay] = useState(parseInt(today.toString().split(' ')[2]))
+  
   const formatDate = () => {
-    const monthText = today.toString().split(' ')[1];
-    const monthTextArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const monthNumber = monthTextArr.indexOf(monthText) + 1 ;
-    const newDay = parseInt(day) + moveDays;
-    return year + '-' + monthNumber  + "-" + newDay;
+    return year + '-' + month  + "-" + day;
   }
 
+  const [date, handleDate ] = useState(formatDate());
+
+
   const moveDayBack = () => {
-    handleMoveDays(moveDays - 1)
-    handleDate(formatDate())
+    if (day > 1) {
+      handleMoveDays(moveDays - 1)
+      handleDay(day - 1)
+      handleDate(formatDate())
+    } else {
+      handleDay(30)
+      handleMonth(month - 1);
+      handleMoveDays(moveDays - 1)
+      handleDate(formatDate())
+    } 
+   
   }
 
   const moveDayAfter = () => {
-    handleMoveDays(moveDays + 1)
-    handleDate(formatDate())
+    if(day  < 30){
+      handleMoveDays(moveDays + 1)
+      handleDay(day + 1)
+      handleDate(formatDate())
+    } else {
+      handleMoveDays(moveDays + 1)
+      handleDay(1)
+      handleMonth(month + 1)
+      handleDate(formatDate())
+    }
   }
 
 
@@ -38,19 +60,23 @@ const Home = () => {
   // })
 
   useEffect(() => {
+    console.log(`https://api.nasa.gov/planetary/apod?date=${formatDate() + "&"}api_key=${process.env.REACT_APP_NASA_API_KEY}`)
     const  getPic = async () => {
       try {
+        console.log('EFFFFEEEECT')
         const day_pic_href = await axios.get(`https://api.nasa.gov/planetary/apod?date=${formatDate() + "&"}api_key=${process.env.REACT_APP_NASA_API_KEY}`);
+        console.log(day_pic_href)
         handlePic(day_pic_href);
       }
       catch(error) { 
         console.log(error);
         //setDayBeforeMessage();
-        moveDayBack() ;
+        // moveDayBack() ;
       }
     } ;
     getPic();
-  },[date])
+  },[moveDays])
+
 
   return (
     <section className="container-home">
