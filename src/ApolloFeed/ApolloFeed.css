@@ -1,0 +1,12 @@
+.feed-line {
+ display:flex;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ margin:65px 40px 100px;
+
+}
+
+.card-box {
+  width:33%;
+  border:1px solid green;
+}

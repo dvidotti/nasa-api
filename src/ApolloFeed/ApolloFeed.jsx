@@ -3,8 +3,8 @@ import Card from '../UI/Card/Card'
 import { apollo } from "../service/service";
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadFavorites } from '../actions/favorites'
-
+import { loadFavorites } from '../actions/favorites';
+import './ApolloFeed.css'
 
 const ApolloFeed = (props) => {
   const [apiResult, setApiResult] = useState([]);
@@ -30,16 +30,16 @@ const ApolloFeed = (props) => {
   return(
   <div>
     <h1>Discover Apollo</h1>
-    <ul>
+    <div className="feed-line">       
       {props.favorites.length > 0 && props.favorites.map((item, idx) => {
         if (item.links) {
           return(
-              <Card withButton={true}  title={item.data[0].keywords[0]} img={item.links[0].href} key={idx} idx={idx} /> 
-
-          )}
+              <Card className="card-box" withButton={true}  title={item.data[0].keywords[0]} img={item.links[0].href} key={idx} idx={idx} /> 
+          )
+          }
         }
       )}
-    </ul>
+    </div>
   </div>
   );
 }
