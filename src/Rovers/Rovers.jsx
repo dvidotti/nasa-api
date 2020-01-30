@@ -25,9 +25,6 @@ const Rovers = () => {
   const [ monthText, handleMonthText] = useState('');
   
 
-  
-  
-  
 
   const giveRoverYearsList = () => {
     switch (rover) {
@@ -139,9 +136,6 @@ const Rovers = () => {
         } else return months;;
     }
   }
-
-  
-
 
   useEffect(() => {
     handleYear(giveRoverYearsList());

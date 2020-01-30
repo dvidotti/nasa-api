@@ -11,9 +11,9 @@ export const addFavorite = () => {
   }
 } 
 
-export const loadFavorites = (resultFromApi) => {
+export const loadFavorites = (api) => {
   return {
     type: 'LOAD_FAVORITES',
-    resultFromApi,
+    api,
   }
 }

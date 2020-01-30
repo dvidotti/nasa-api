@@ -63,7 +63,6 @@ const Home = () => {
     console.log(`https://api.nasa.gov/planetary/apod?date=${formatDate() + "&"}api_key=${process.env.REACT_APP_NASA_API_KEY}`)
     const  getPic = async () => {
       try {
-        console.log('EFFFFEEEECT')
         const day_pic_href = await axios.get(`https://api.nasa.gov/planetary/apod?date=${formatDate() + "&"}api_key=${process.env.REACT_APP_NASA_API_KEY}`);
         console.log(day_pic_href)
         handlePic(day_pic_href);

@@ -21,7 +21,7 @@ const Details = (props) => {
   // }
 
   const backToFeed = () => {
-    console.log('passou')
+    console.log('passed')
     props.history.push('/apollo');
   }
 

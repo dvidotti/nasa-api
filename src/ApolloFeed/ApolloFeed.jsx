@@ -7,17 +7,15 @@ import { loadFavorites } from '../actions/favorites';
 import './ApolloFeed.css'
 
 const ApolloFeed = (props) => {
-  const [apiResult, setApiResult] = useState([]);
-  console.log(props.favorites)
-  console.log(apiResult)
-
+  // const [apiResult, setApiResult] = useState([]);
+  console.log(props.favorites);
 
 
   useEffect(() => {
     const getInfo = async () => {
       try { 
         const resultFromApi = await apollo;
-        setApiResult(resultFromApi.data.collection.items)
+        // setApiResult(resultFromApi.data.collection.items)
         console.log(resultFromApi)
         props.loadFavorites({resultFromApi:resultFromApi.data.collection.items});
       } catch(error) {
