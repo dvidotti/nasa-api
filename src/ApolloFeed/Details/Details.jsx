@@ -27,12 +27,12 @@ const Details = (props) => {
 
   return (
     <div>
-      {props.favorite && 
+      {props.apollo_detail && 
         <div>
-          <Card withButton={false} img={props.favorite.links[0].href} alt={props.favorite.data[0].title}/>
-          <h1>{props.favorite.data[0].keywords[0]}</h1>
-          <h2>{props.favorite.data[0].title}</h2>
-          <p>{props.favorite.data[0].description}</p>
+          <Card withButton={false} img={props.apollo_detail.links[0].href} alt={props.apollo_detail.data[0].title}/>
+          <h1>{props.apollo_detail.data[0].keywords[0]}</h1>
+          <h2>{props.apollo_detail.data[0].title}</h2>
+          <p>{props.apollo_detail.data[0].description}</p>
           <button onClick={backToFeed}>BACK</button>
           {/* <button onClick={handleDelete}>DELETE</button>
           <button onClick={handleAdd}>ADD</button> */}
@@ -43,10 +43,10 @@ const Details = (props) => {
 };
 
 const mapPropsToState = (state, ownProps) => {
-  console.log(state.favorites)
-  let id = parseInt(ownProps.match.params.id);
+  console.log(ownProps.match.params.id)
+  let id = ownProps.match.params.id;
   return {
-    favorite: state.favorites[id]
+    apollo_detail: state.apollo_feed[id]
   }
 }
 

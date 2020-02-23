@@ -13,7 +13,7 @@ export const addFavorite = () => {
 
 export const loadFavorites = (api) => {
   return {
-    type: 'LOAD_FAVORITES',
-    api,
+    type: 'LOAD_APOLLO',
+    api
   }
 }

@@ -5,6 +5,7 @@ import Home from './Home/Home';
 import ApolloFeed from './ApolloFeed/ApolloFeed'
 import Details from './ApolloFeed/Details/Details';
 import Rovers from './Rovers/Rovers';
+import Favorites from './Favorites/Favorites'
 import { withRouter} from 'react-router-dom'
 
 const App = (props) => {
@@ -30,6 +31,7 @@ const App = (props) => {
       <Switch>  
         <Route exact path='/' component={Home} />
         <Route path='/apollo' component={ApolloFeed} />
+        <Route path='/favorites' component={Favorites} />
         <Route path='/rovers' component={Rovers} />
         <Route path='/details/:id' component={Details} />
       </Switch>
