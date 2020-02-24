@@ -18,6 +18,11 @@ const Card = (props) => {
     console.log(props.idx)
   }
 
+  const deleteFav = () => {
+    props.deleteFav(props.idx);
+    console.log(props.idx)
+  }
+
   return(
     <div className="box-card-inner">
       <div className="box-title"><h2>{title}</h2></div>
@@ -30,6 +35,7 @@ const Card = (props) => {
           <div>
             <div className="box-image-margin"><button onClick={viewDetails}>View</button></div>
             <div className="box-image-margin"><button onClick={addFavorite}>Add Favorite</button></div>
+            <div className="box-image-margin"><button onClick={deleteFav}>Delete Favorite</button></div>
           </div>
         }
       </div> 
@@ -48,7 +54,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveFavorite: (idx) => {dispatch({type: "ADD_FAVORITE", idx})}
+    saveFavorite: (idx) => {dispatch({type: "ADD_FAVORITE", idx})},
+    deleteFav: (idx) => { dispatch({type: "DELET_FAV", idx})}
   }
 }
 
